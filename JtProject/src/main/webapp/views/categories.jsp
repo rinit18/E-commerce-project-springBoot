@@ -104,14 +104,16 @@
 					<td>${category.name }</td>
 
 					<td>
-						<form action="categories/delete" method="get">
+						<form action="categories/delete" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<input type="hidden" name="id" value="${category.id}">
 							<input type="submit" value="Delete" class="btn btn-danger">
 						</form>
 					</td>
 
 					<td>
-						<form action="categories/update" method="get">
+						<form action="categories/update" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
 
 

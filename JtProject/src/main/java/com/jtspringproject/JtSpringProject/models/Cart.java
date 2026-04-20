@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity(name="CART")
+@Entity(name = "CART")
 public class Cart {
 
     @Id
@@ -15,7 +15,7 @@ public class Cart {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name="customer_id")
+    @JoinColumn(name = "customer_id")
     private User customer;
 
     public Cart() {
@@ -28,7 +28,6 @@ public class Cart {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public User getCustomer() {
         return customer;

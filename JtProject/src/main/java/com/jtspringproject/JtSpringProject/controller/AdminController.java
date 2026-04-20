@@ -75,13 +75,13 @@ public class AdminController {
 		return "redirect:categories";
 	}
 
-	@GetMapping("categories/delete")
+	@PostMapping("categories/delete")
 	public String deleteCategory(@RequestParam("id") int id) {
 		this.categoryService.deleteCategory(id);
 		return "redirect:/admin/categories";
 	}
 
-	@GetMapping("categories/update")
+	@PostMapping("categories/update")
 	public String updateCategory(@RequestParam("categoryid") int id,
 			@RequestParam("categoryname") String categoryname) {
 		this.categoryService.updateCategory(id, categoryname);
@@ -142,7 +142,7 @@ public class AdminController {
 		return "redirect:/admin/products";
 	}
 
-	@GetMapping("products/delete")
+	@PostMapping("products/delete")
 	public String removeProduct(@RequestParam("id") int id) {
 		this.productService.deleteProduct(id);
 		return "redirect:/admin/products";

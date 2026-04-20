@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,11 +11,10 @@ import com.jtspringproject.JtSpringProject.models.Category;
 
 @Repository
 public class categoryDao {
-	@Autowired
-	private SessionFactory sessionFactory;
+	private final SessionFactory sessionFactory;
 
-	public void setSessionFactory(SessionFactory sf) {
-		this.sessionFactory = sf;
+	public categoryDao(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 
 	@Transactional
@@ -29,17 +27,16 @@ public class categoryDao {
 
 	@Transactional
 	public List<Category> getCategories() {
-		return this.sessionFactory.getCurrentSession().createQuery("from CATEGORY").list();
+		return this.sessionFactory.getCurrentSession().createQuery("from CATEGORY", Category.class).list();
 	}
 
 	@Transactional
-	public Boolean deletCategory(int id) {
-
+	public Boolean deleteCategory(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Object persistanceInstance = session.load(Category.class, id);
+		Category category = session.get(Category.class, id);
 
-		if (persistanceInstance != null) {
-			session.delete(persistanceInstance);
+		if (category != null) {
+			session.delete(category);
 			return true;
 		}
 		return false;
@@ -48,6 +45,9 @@ public class categoryDao {
 	@Transactional
 	public Category updateCategory(int id, String name) {
 		Category category = this.sessionFactory.getCurrentSession().get(Category.class, id);
+		if (category == null) {
+			return null;
+		}
 		category.setName(name);
 
 		this.sessionFactory.getCurrentSession().update(category);
@@ -56,6 +56,6 @@ public class categoryDao {
 
 	@Transactional
 	public Category getCategory(int id) {
-		return this.sessionFactory.getCurrentSession().get(Category.class,id);
+		return this.sessionFactory.getCurrentSession().get(Category.class, id);
 	}
 }

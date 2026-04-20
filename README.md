@@ -1,113 +1,203 @@
 <a href="https://trendshift.io/repositories/151" target="_blank"><img src="https://trendshift.io/api/badge/repositories/151" alt="jaygajera17%2FE-commerce-project-springBoot | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 
-## New Version ( what's new)
-- Hibernate configuration added( database and tables automatically create when run the project)
-- Service classes provide reusable services throughout project
-- dao classes interact with database 
-- bug fixed ( product image, security , etc..)
-- support in both eclipse & intellij ide
-- overall redesign entire code that help reusability. 
-- disclaimer: currently working on this branch so there may be some bug related to endpoint, and working on cart logic.
-  
-## Quickstart
+# E-commerce Spring Boot (JSP + Hibernate)
 
-1. Clone the repository
-2. Open the project in your IDE: IntelliJ IDEA (recommended) or Eclipse
-    * If you are using IntelliJ IDEA, make sure the IDE opens project as **Maven** and recognizes the project as a Spring Boot project. Also, you must change the working directory of the project so that the views (the actual web pages to be shown) are found by Spring Boot (check out [Web Directories IntelliJ IDEA](#web-directories).
-3. Make sure you are in the `JtProject` directory
-4. Configure the database connection in `application.properties` file (check the [Database](#database) section below for more info)
-5. Run the project (by running the `main` method in `JtSpringProjectApplication.java`)
-6. Open http://localhost:8080/ in your browser!
-   * If you ran the [`basedata.sql`](https://github.com/jaygajera17/E-commerce-project-springBoot/blob/master2/JtProject/basedata.sql)script on the database, you can log in with the following credentials as admin; otherwise you'll have to manually create an admin user in the database:
-     * Username: `admin`
-     * Password: `123`
-   * Log in as a normal user:
-     * Username: `lisa`
-     * Password: `765`
+Production-oriented Java e-commerce web application built with Spring Boot, JSP, Spring Security, and Hibernate SessionFactory.
 
-### Database
+This project follows a layered MVC architecture and supports role-based access for admin and customer workflows.
 
-MySQL or MariaDB can be used as the database for this project. The database connection can be configured in the `src/main/resources/application.properties` file, with the appropriate values for the following properties:
+## Community Stats
 
-**( You'd better use another username not root, and ensure that the user has the corresponding permissions for the database. )**
+[![GitHub stars](https://img.shields.io/github/stars/jaygajera17/E-commerce-project-springBoot?style=for-the-badge)](https://github.com/jaygajera17/E-commerce-project-springBoot/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/jaygajera17/E-commerce-project-springBoot?style=for-the-badge)](https://github.com/jaygajera17/E-commerce-project-springBoot/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/jaygajera17/E-commerce-project-springBoot?style=for-the-badge)](https://github.com/jaygajera17/E-commerce-project-springBoot/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/jaygajera17/E-commerce-project-springBoot?style=for-the-badge)](https://github.com/jaygajera17/E-commerce-project-springBoot/pulls)
+[![GitHub contributors](https://img.shields.io/github/contributors/jaygajera17/E-commerce-project-springBoot?style=for-the-badge)](https://github.com/jaygajera17/E-commerce-project-springBoot/graphs/contributors)
 
-```properties
-    db.url=jdbc:mysql://[ip address of db]:[port of db]/ecommjava?createDatabaseIfNotExist=true
-    db.username=[username]
-    db.password=[password, if any]
+## Highlights
+
+- Server-rendered e-commerce app (JSP views)
+- Spring Security authentication and role-based authorization
+- Custom Hibernate SessionFactory configuration (non-Spring-Data JPA runtime)
+- MySQL-backed persistence with DAO and service layers
+- Admin modules for products, categories, and customer listing
+- User modules for registration, login, profile management, and product browsing
+- Jenkins pipeline file included for CI/CD bootstrap
+
+## Tech Stack
+
+- Java 11
+- Spring Boot 2.6.4
+- Spring MVC
+- Spring Security
+- Hibernate ORM (via `LocalSessionFactoryBean`)
+- JSP + JSTL + Tomcat Jasper
+- MySQL 8 connector
+- Maven
+
+## Project Structure
+
+```text
+JtProject/
+  src/main/java/com/jtspringproject/JtSpringProject/
+    configuration/     # Security config
+    controller/        # MVC controllers
+    dao/               # Data access layer
+    models/            # Entities
+    services/          # Business layer
+    repository/        # Spring Data repository (partial)
+    HibernateConfiguration.java
+    JtSpringProjectApplication.java
+  src/main/resources/
+    application.properties
+  src/main/webapp/views/
+    *.jsp
+  basedata.sql
+  pom.xml
 ```
 
-if you met the error `java.lang.IllegalArgumentException: Could not resolve placeholder 'db.driver' in value "${db.driver}"`, maybe you should change your `mysql-connector-java` version in `pom.xml` file according to your mysql version, don't forget to reload your Maven project.
+## Getting Started
 
-Having done that, you must create some base data in the database. You can do that by running the `basedata.sql` script on the database. Check out Google for how to do that, because it depends on what tool you are using to access said database. 
+### Prerequisites
 
-### Web Directories
+- Java 11+
+- Maven 3.8+
+- MySQL or MariaDB
 
-The views are located in `src/main/webapp/views`, but for some reason, Spring Boot doesn't recognize that directory. To remedy this, you must change the working directory of the project in your IDE. If you're using IntelliJ IDEA, follow these steps:
+### 1) Clone and move into project
 
-1. Click on the "Edit Configurations..." button in the top right corner of the IDE
-2. Click on the `JtSpringProjectApplication` configuration
-3. Change the "Working directory" option (if not present, click on "Modify Options" and select from the list) to the `$MODULE_WORKING_DIR$` macro
-4. Click "Apply" and "OK"
+```bash
+git clone https://github.com/jaygajera17/E-commerce-project-springBoot.git
+cd E-commerce-project-springBoot/JtProject
+```
+
+### 2) Configure database
+
+Update `src/main/resources/application.properties`:
+
+```properties
+db.driver=com.mysql.cj.jdbc.Driver
+db.url=jdbc:mysql://localhost:3306/ecommjava?createDatabaseIfNotExist=true
+db.username=your_db_user
+db.password=your_db_password
+
+hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+hibernate.show_sql=true
+hibernate.hbm2ddl.auto=update
+entitymanager.packagesToScan=com
+```
+
+### 3) Optional: seed sample data
+
+Run `basedata.sql` against your database if you want initial categories/users/products.
+
+Note: sample credentials in `basedata.sql` are development-only defaults.
+
+### 4) Run the app
+
+```bash
+mvn clean package
+mvn spring-boot:run
+```
+
+App URL: http://localhost:8080/
+
+## IDE Notes (IntelliJ)
+
+If JSP views are not resolved, set the run configuration working directory to `$MODULE_WORKING_DIR$`.
+
+## Core Endpoints
+
+### Public/User
+
+- `/`
+- `/login`
+- `/register`
+- `/newuserregister`
+- `/user/products`
+- `/profileDisplay`
+
+### Admin
+
+- `/admin/`
+- `/admin/Dashboard`
+- `/admin/products`
+- `/admin/categories`
+- `/admin/customers`
+
+## Security Model
+
+- Admin routes under `/admin/**` require role `ADMIN`
+- User routes require role `USER`
+- Login pages:
+  - Admin: `/admin/login`
+  - User: `/login`
+- CSRF protection is enabled for form submissions
+
+## Build and Test
+
+```bash
+mvn clean verify
+```
+
+Notes:
+
+- `mvn test` requires a reachable database because context startup initializes Hibernate and datasource beans.
+
+## CI/CD
+
+A Jenkins pipeline is included in `jenkins file` with stages for:
+
+- Checkout
+- Build
+- Test
+- Deploy (template placeholder)
+
+Adjust branch, deployment steps, and credentials for your environment.
+
+## Troubleshooting
+
+- `Could not resolve placeholder 'db.driver'`:
+  - Ensure all `db.*` keys exist in `application.properties`
+- JSP pages not rendering:
+  - Verify working directory and `spring.mvc.view.prefix=/views/`
+- Tests failing on startup:
+  - Start MySQL and verify connection credentials first
+
+## Screenshots
+
+![Preview 1](https://github.com/jaygajera17/E-commerce-project-springBoot/assets/81226571/02a04d3c-1fc9-418c-b231-639f6525d07e)
+![Preview 2](https://github.com/jaygajera17/E-commerce-project-springBoot/assets/81226571/24c4451b-43a6-4c23-a78a-786eab4303b0)
+![Preview 3](https://github.com/jaygajera17/E-commerce-project-springBoot/assets/81226571/93c1baeb-326c-450f-867e-a883900a6644)
+
+## Roadmap
+
+- Complete cart and checkout domain flow
+- Replace remaining legacy naming conventions with standard Java naming
+- Expand automated test coverage (service + controller integration tests)
+- Add Docker-based local development setup
+
+## Demo
+
+demo video: https://youtu.be/c6WWdINWSlI
+
+## ⭐ Support This Project
+
+If this project helped you, please consider giving it a star on GitHub.
+Your support helps improve visibility and motivates future maintenance.
 
 
-When you run the project, the views should be found by Spring Boot and you should see a login page in http://localhost:8080/ (if not logged in previously)!
-![configurations](image.png)
 
-# Workflow
-- ![image](https://github.com/jaygajera17/E-commerce-project-springBoot/assets/81226571/69951cb7-65e2-4225-8681-2542859aaec6)
-### Controller
-- control the endpoint and also send data to view( we use ModelAndView method)
-- ``` @GetMapping("login")
-	public String adminlogin() {
-		
-		return "adminlogin";
-	}```
-- whenever /login url is hit , src->main->webapp-> adminlogin.jsp file execute
-### Models
-- represent data as entity and relationship among them.
+## Star History
 
-### View
-- receive data from controller and show with frontend.
+<a href="https://www.star-history.com/?repos=jaygajera17%2FE-commerce-project-springBoot&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=jaygajera17/E-commerce-project-springBoot&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=jaygajera17/E-commerce-project-springBoot&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=jaygajera17/E-commerce-project-springBoot&type=date&legend=top-left" />
+ </picture>
+</a>
 
-## Endpoints
-- http://localhost:8080/
-- http://localhost:8080/register
-- http://localhost:8080/admin/products
-- http://localhost:8080/admin/customers
-- http://localhost:8080/admin/categories
-- http://localhost:8080/admin/Dashboard
-
-
-## Spring Boot
-
-For any information about Spring Boot, here are some useful links!
-
-### Reference Documentation
-For further reference, please consider the following sections:
-
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.6.4/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.6.4/maven-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.6.4/reference/htmlsingle/#boot-features-developing-web-applications)
-
-### Guides
-The following guides illustrate how to use some features concretely:
-
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-
-## Preview
-
-![image](https://github.com/jaygajera17/E-commerce-project-springBoot/assets/81226571/02a04d3c-1fc9-418c-b231-639f6525d07e)
-![image](https://github.com/jaygajera17/E-commerce-project-springBoot/assets/81226571/24c4451b-43a6-4c23-a78a-786eab4303b0)
-![image](https://github.com/jaygajera17/E-commerce-project-springBoot/assets/81226571/93c1baeb-326c-450f-867e-a883900a6644)
-
-
-## Link
-
-- 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗽𝗿𝗼𝗷𝗲𝗰𝘁 𝘃𝗶𝗱𝗲𝗼 𝗪𝗼𝗿𝗸𝗶𝗻𝗴 𝗗𝗲𝗺𝗼 + 𝘀𝘁𝗲𝗽 𝗯𝘆 𝘀𝘁𝗲𝗽 𝗲𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻 𝗹𝗶𝗻𝗸  ( old version )::---  [  click here  ](https://youtu.be/c6WWdINWSlI) [![youtube][youtube-shield]][youtube-url]
-
-[youtube-shield]:https://img.shields.io/youtube/views/c6WWdINWSlI?style=social
-[youtube-url]:  https://youtu.be/c6WWdINWSlI
+<div align="center">
+  <sub>Built as a college project · Grown into a community resource · Maintained with ❤️</sub>
+</div>

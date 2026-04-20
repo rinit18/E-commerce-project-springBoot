@@ -1,10 +1,5 @@
-<%@page import="java.sql.*"%>
-<%@page import="java.util.*"%>
-<%@page import="java.text.*"%>
-<%@page import ="java.io.FileOutputStream" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@page import=" java.io.ObjectOutputStream" %>
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -98,7 +93,8 @@
 					</td>
 
 					<td>
-					<form action="products/delete" method="get">
+					<form action="products/delete" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<input type="hidden" name="id" value="${product.id}">
 							<input type="submit" value="Delete" class="btn btn-danger">
 					</form>

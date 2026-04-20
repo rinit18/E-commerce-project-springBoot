@@ -48,8 +48,7 @@ public class SecurityConfiguration {
 							.logoutSuccessUrl("/admin/login")
 							.deleteCookies("JSESSIONID"))
 					.exceptionHandling(exception -> exception
-							.accessDeniedPage("/403")
-					);
+							.accessDeniedPage("/403"));
 			return http.build();
 		}
 	}
@@ -78,8 +77,7 @@ public class SecurityConfiguration {
 							.logoutSuccessUrl("/login")
 							.deleteCookies("JSESSIONID"))
 					.exceptionHandling(exception -> exception
-							.accessDeniedPage("/403")
-					);
+							.accessDeniedPage("/403"));
 			return http.build();
 		}
 	}
