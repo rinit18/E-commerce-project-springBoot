@@ -167,7 +167,7 @@ public String adminlogin() {
 
 - [YouTube project walkthrough (legacy version)](https://youtu.be/c6WWdINWSlI) [![youtube][youtube-shield]][youtube-url]
 
-## Preview
+## Core Endpoints
 
 ![Preview 1](https://github.com/jaygajera17/E-commerce-project-springBoot/assets/81226571/02a04d3c-1fc9-418c-b231-639f6525d07e)
 ![Preview 2](https://github.com/jaygajera17/E-commerce-project-springBoot/assets/81226571/24c4451b-43a6-4c23-a78a-786eab4303b0)
