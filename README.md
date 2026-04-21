@@ -7,7 +7,7 @@ Production-oriented Java e-commerce web application built with Spring Boot, JSP,
 This project follows a layered MVC architecture and supports role-based access for admin and customer workflows.
 
 <br/><br/>
- 
+
 <h1>🛒 E-Commerce Spring Boot</h1>
  
 <p>A production-oriented Java e-commerce web application built with Spring Boot, JSP, Spring Security, and Hibernate — featuring role-based access for admin and customer workflows.</p>
@@ -44,6 +44,7 @@ This project follows a layered MVC architecture and supports role-based access f
 - Jenkins pipeline file included for CI/CD bootstrap
 
 ## Tech Stack
+
 <p>
   <img src="https://img.shields.io/badge/Java-11-ED8B00?style=flat-square&logo=openjdk&logoColor=white&labelColor=1a1a2e" alt="Java 11"/>
   <img src="https://img.shields.io/badge/Spring%20Boot-2.6.4-6DB33F?style=flat-square&logo=springboot&logoColor=white&labelColor=1a1a2e" alt="Spring Boot"/>
@@ -65,22 +66,21 @@ This project follows a layered MVC architecture and supports role-based access f
 ## Project Structure
 
 ```text
-JtProject/
-  src/main/java/com/jtspringproject/JtSpringProject/
-    configuration/     # Security config
-    controller/        # MVC controllers
-    dao/               # Data access layer
-    models/            # Entities
-    services/          # Business layer
-    repository/        # Spring Data repository (partial)
-    HibernateConfiguration.java
-    JtSpringProjectApplication.java
-  src/main/resources/
-    application.properties
-  src/main/webapp/views/
-    *.jsp
-  basedata.sql
-  pom.xml
+src/main/java/com/jtspringproject/JtSpringProject/
+  configuration/     # Security config
+  controller/        # MVC controllers
+  dao/               # Data access layer
+  models/            # Entities
+  services/          # Business layer
+  repository/        # Spring Data repository (partial)
+  HibernateConfiguration.java
+  JtSpringProjectApplication.java
+src/main/resources/
+  application.properties
+src/main/webapp/views/
+  *.jsp
+basedata.sql
+pom.xml
 ```
 
 ## Getting Started
@@ -95,7 +95,7 @@ JtProject/
 
 ```bash
 git clone https://github.com/jaygajera17/E-commerce-project-springBoot.git
-cd E-commerce-project-springBoot/JtProject
+cd E-commerce-project-springBoot
 ```
 
 ### 2) Configure database
