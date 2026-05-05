@@ -202,6 +202,23 @@ public class UserController {
 		return "redirect:/user/cartproducts";
 	}
 
+	@GetMapping("/user/cart/delete")
+	public String removeFromCart(@RequestParam("id") int productId) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userService.getUserByUsername(username);
+
+		if (user != null) {
+			Cart cart = cartService.getCartByUserId(user.getId());
+			if (cart != null) {
+				CartProductId cartProductId = new CartProductId(cart.getId(), productId);
+				if (cartProductRepository.existsById(cartProductId)) {
+					cartProductRepository.deleteById(cartProductId);
+				}
+			}
+		}
+		return "redirect:/user/cartproducts";
+	}
+
 	// ==========================================
 	// LEARNING & TEST ENDPOINTS
 	// ==========================================
